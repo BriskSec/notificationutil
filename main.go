@@ -45,7 +45,7 @@ func (i Kind) String() string {
 	}
 }
 
-func NotifyAbnormalCondition(title string, kind Kind, message string, err error) {
+func Notify(title string, kind Kind, message string, err error) {
 	details := ""
 	if err != nil {
 		details = fmt.Sprintf("%v", err)
