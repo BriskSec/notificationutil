@@ -3,7 +3,6 @@ package notificationutil
 import (
 	"fmt"
 	"log"
-	"math/rand"
 	"time"
 
 	"github.com/aws/aws-sdk-go/aws"
@@ -76,9 +75,4 @@ func NotifyAbnormalCondition(title string, kind Kind, message string, err error)
 	if aendErr != nil {
 		log.Printf("Error sending notification: %v \n", aendErr)
 	}
-}
-
-func main() {
-	rand.Seed(time.Now().UTC().UnixNano())
-	NotifyAbnormalCondition("title", "kind", "message3445", nil)
 }
