@@ -31,6 +31,21 @@ const (
 	AbnormalCondition
 )
 
+func (i Kind) String() string {
+	switch i {
+	case Information:
+		return "Information"
+	case UnexpectedError:
+		return "UnexpectedError"
+	case ExpectedError:
+		return "ExpectedError"
+	case AbnormalCondition:
+		return "AbnormalCondition"
+	default:
+		return "Unknown"
+	}
+}
+
 func NotifyAbnormalCondition(title string, kind Kind, message string, err error) {
 	details := ""
 	if err != nil {
