@@ -1,8 +1,9 @@
-package notificationutil
+package main
 
 import (
 	"fmt"
 	"log"
+	"math/rand"
 	"time"
 
 	"github.com/aws/aws-sdk-go/aws"
@@ -59,8 +60,8 @@ func NotifyAbnormalCondition(title string, kind Kind, message string, err error)
 				StringValue: aws.String(title),
 			},
 			"Kind": &sqs.MessageAttributeValue{
-				DataType:    aws.String("Number"),
-				StringValue: aws.String(string(kind)),
+				DataType:    aws.String("String"),
+				StringValue: aws.String(fmt.Sprintf("%d", kind)),
 			},
 			"Timestamp": &sqs.MessageAttributeValue{
 				DataType:    aws.String("String"),
@@ -75,4 +76,9 @@ func NotifyAbnormalCondition(title string, kind Kind, message string, err error)
 	if aendErr != nil {
 		log.Printf("Error sending notification: %v \n", aendErr)
 	}
+}
+
+func main() {
+	rand.Seed(time.Now().UTC().UnixNano())
+	NotifyAbnormalCondition("title", UnexpectedError, "message34455N", fmt.Errorf("jjsajjsajjs"))
 }
